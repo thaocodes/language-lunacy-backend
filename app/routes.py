@@ -18,9 +18,12 @@ def get_words(language, start, end):
     try:
         words = scrape_words(language, start, end)
         return jsonify(words), 200
+    except ValueError as e:
+        return jsonify(error=str(e))
     except Exception as e: 
         # extract error message string from exception object
         return jsonify(error=str(e)), 404
+    
 
 
 
