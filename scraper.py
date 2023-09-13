@@ -1,8 +1,8 @@
-from flask import Flask, jsonify
+from flask import Flask
 from bs4 import BeautifulSoup
 import requests
 
-def get_language_words(language):
+def scrape_words(language):
     '''
     Fetches a list of common words in the specified language along with their English translations.
     
@@ -10,7 +10,7 @@ def get_language_words(language):
     language (string): The target language for fetching the words.
 
     Returns:
-    tuple: A JSON response containing the words list or an error message, and the HTTP status code.
+    words (array): A list of dictionary objects containing words in the specified language and English.
     '''
     language = language.lower()
     url = f'https://1000mostcommonwords.com/1000-most-common-{language}-words/'
@@ -34,7 +34,7 @@ def get_language_words(language):
                 "english": columns[1].text,   # second column is english translation 
                 "difficulty": "unset"
             })
-            
+
     return words
             
 
