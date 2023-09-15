@@ -16,7 +16,7 @@ def scrape_words(language, start=0, end=100):
     '''
     language = language.lower()
 
-    if start < 0 or end > 1000 or start >= end: 
+    if start < 1 or end > 1000 or start >= end: 
         raise ValueError("Invalid start or end value. Valid range is 0-1000 and start should be less than end.")
     
     url = f'https://1000mostcommonwords.com/1000-most-common-{language}-words/'
@@ -32,7 +32,7 @@ def scrape_words(language, start=0, end=100):
     rows = soup.find_all('tr')[1:]
 
     words = []
-    for row in rows[start:end]:
+    for row in rows[start - 1:end]:
         columns = row.find_all('td')
         if len(columns) == 3:
             words.append({
